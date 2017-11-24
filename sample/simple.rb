@@ -1,8 +1,12 @@
 require 'maf'
+require 'json'
 
 Maf.routing do
   get '/foo' do
-    text "matched /foo\n"
+    text <<~EOS
+    matched /foo
+    #{params.to_json}
+    EOS
   end
 
   post '/bar' do
