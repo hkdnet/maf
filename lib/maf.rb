@@ -19,9 +19,9 @@ module Maf
       @config ||= Config.new
     end
 
-    def routing
+    def routing(&block)
       routing = Maf::Dsl::Routing.new
-      yield routing
+      routing.instance_exec(&block)
       config.routes += routing.to_a
     end
   end
