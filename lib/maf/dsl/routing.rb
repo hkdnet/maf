@@ -8,6 +8,10 @@ module Maf::Dsl
       routes << Maf::Route.new('GET', path, block)
     end
 
+    def post(path, &block)
+      routes << Maf::Route.new('POST', path, block)
+    end
+
     def to_a
       routes
     end
