@@ -20,6 +20,10 @@ module Maf::Dsl
       @body = [text]
     end
 
+    def params
+      @env.params
+    end
+
     def to_a
       [ @status, @header, @body ]
     end

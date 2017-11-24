@@ -23,4 +23,28 @@ RSpec.describe Maf::Env do
       end
     end
   end
+
+  describe '#params' do
+    it 'should be frozen' do
+      expect(subject.params).to be_frozen
+    end
+
+    context 'GET' do
+      context 'w/o query string' do
+        let(:env) { super().merge({ 'QUERY_STRING' => '' }) }
+
+        it 'should be empty' do
+          expect(subject.params).to be_empty
+        end
+      end
+
+      it 'parses query_params' do
+        expected = {
+          'bar' => '1',
+          'baz' => '2',
+        }
+        expect(subject.params).to eq expected
+      end
+    end
+  end
 end
