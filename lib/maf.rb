@@ -1,6 +1,7 @@
 require 'rack'
 require "maf/version"
 
+require "maf/server"
 require "maf/config"
 require "maf/route"
 require "maf/env"
@@ -23,32 +24,6 @@ module Maf
       routing = Maf::Dsl::Routing.new
       routing.instance_exec(&block)
       config.routes += routing.to_a
-    end
-  end
-
-  class Server
-    def initialize(config = Maf.config)
-      @config = config
-    end
-
-    def call(env)
-      myenv = Maf::Env.new(env)
-      route = @config.routes.find { |e| e.match?(myenv.method, myenv.path) }
-      return render_400 unless route
-
-      route.call(myenv)
-    end
-
-    def render_400
-      [
-        400,
-        {
-          'Content-Type' => 'text/plain',
-        },
-        [
-          "No route matches\n",
-        ],
-      ]
     end
   end
 end
