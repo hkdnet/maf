@@ -13,8 +13,8 @@ module Maf
       method == @method && path == @path
     end
 
-    def call(*args)
-      @resolver.call(*args)
+    def call(env)
+      Maf::Renderer.new(env).render(@resolver)
     end
   end
 end

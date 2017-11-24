@@ -4,8 +4,10 @@ require "maf/version"
 require "maf/config"
 require "maf/route"
 require "maf/env"
+require "maf/renderer"
 
 require "maf/dsl/routing"
+require "maf/dsl/rendering"
 
 module Maf
   class << self
