@@ -14,7 +14,12 @@ module Maf
     end
 
     def call(env)
-      Maf::Renderer.new(env).render(@resolver)
+      renderer = create_renderer(env)
+      renderer.render(@resolver)
+    end
+
+    def create_renderer(env)
+      Maf::Renderer.new(env)
     end
   end
 end
