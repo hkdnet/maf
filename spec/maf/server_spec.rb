@@ -7,6 +7,11 @@ RSpec.describe Maf::Server do
   describe 'call' do
     subject { server.call(env) }
 
+    let(:config) do
+      super().tap do |e|
+        e.routes = e.routes.add_route Maf::Route.new('GET', '/foo', handler)
+      end
+    end
     let(:env) do
       {
         'REQUEST_PATH' => '/foo',
@@ -17,11 +22,6 @@ RSpec.describe Maf::Server do
       -> {
         text('test')
       }
-    end
-    let(:config) do
-      super().tap do |e|
-        e.routes << Maf::Route.new('GET', '/foo', handler)
-      end
     end
 
     it do

@@ -4,6 +4,7 @@ require "maf/version"
 require "maf/server"
 require "maf/config"
 require "maf/route"
+require "maf/routes"
 require "maf/env"
 require "maf/renderer"
 
@@ -23,7 +24,9 @@ module Maf
     def routing(&block)
       routing = Maf::Dsl::Routing.new
       routing.instance_exec(&block)
-      config.routes += routing.to_a
+      routing.to_a.each do |e|
+        config.routes.add_route(e)
+      end
     end
   end
 end

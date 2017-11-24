@@ -6,7 +6,7 @@ module Maf
 
     def call(env)
       myenv = Maf::Env.new(env)
-      route = @config.routes.find { |e| e.match?(myenv.method, myenv.path) }
+      route = @config.routes.find(myenv.method, myenv.path)
       return render_400 unless route
 
       route.call(myenv)
