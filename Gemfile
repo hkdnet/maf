@@ -8,3 +8,4 @@ gemspec
 gem 'pry-byebug'
 gem 'guard'
 gem 'guard-rspec'
+gem 'deep-cover'
