@@ -6,7 +6,7 @@ module Maf
       @routes = Maf::Routes.new([])
     end
 
-    def regsiter_routes(route)
+    def register_route(route)
       @routes = @routes.add_route(route)
     end
   end

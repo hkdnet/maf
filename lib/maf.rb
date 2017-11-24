@@ -25,7 +25,7 @@ module Maf
       routing = Maf::Dsl::Routing.new
       routing.instance_exec(&block)
       routing.to_a.each do |e|
-        config.routes.add_route(e)
+        config.register_route(e)
       end
     end
   end
