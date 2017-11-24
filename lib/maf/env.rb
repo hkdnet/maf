@@ -5,15 +5,15 @@ module Maf
     end
 
     def method
-      @env['REQUEST_METHOD']
+      @env.fetch('REQUEST_METHOD')
     end
 
     def path
-      @env['REQUEST_PATH']
+      @env.fetch('REQUEST_PATH')
     end
 
     def query
-      @env['QUERY_STRING']
+      @env.fetch('QUERY_STRING')
     end
   end
 end
