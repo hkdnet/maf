@@ -1,5 +1,7 @@
 module Maf
   class Config
+    # !@attribute [rw] routes
+    # @returns [Maf::Routes]
     attr_accessor :routes
 
     def initialize

@@ -1,9 +1,13 @@
 module Maf
+  # A Rack application
   class Server
+    # @param config [Maf::Config]
     def initialize(config = Maf.config)
       @config = config
     end
 
+    # @param env [Hash{String => String}] rack env
+    # @return [Array] of status, headers, body
     def call(env)
       myenv = Maf::Env.new(env)
       route = @config.routes.find(myenv.method, myenv.path)
@@ -11,6 +15,9 @@ module Maf
 
       route.call(myenv)
     end
+
+    private
+
 
     def render_400
       [
