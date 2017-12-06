@@ -22,14 +22,14 @@ module Maf
     # @param env [Maf::Env]
     # @return [Array] Rack response
     def call(env)
-      renderer = create_renderer(env)
+      renderer = create_renderer(Maf.config, env)
       renderer.render(@resolver)
     end
 
     private
 
-    def create_renderer(env)
-      Maf::Renderer.new(env)
+    def create_renderer(config, env)
+      Maf::Renderer.new(config, env)
     end
   end
 end
