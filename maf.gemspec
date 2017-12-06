@@ -21,8 +21,11 @@ Gem::Specification.new do |spec|
   spec.executables   = spec.files.grep(%r{^exe/}) { |f| File.basename(f) }
   spec.require_paths = ["lib"]
 
+  spec.metadata["yard.run"] = "yri" # use "yard" to build full HTML docs.
+
   spec.add_dependency "rack", "~> 2.0"
   spec.add_development_dependency "bundler", "~> 1.16.a"
   spec.add_development_dependency "rake", "~> 10.0"
   spec.add_development_dependency "rspec", "~> 3.0"
+  spec.add_development_dependency "yard", "~> 0.9"
 end

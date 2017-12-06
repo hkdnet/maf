@@ -21,6 +21,12 @@ module Maf
       @config ||= Config.new
     end
 
+    # @example
+    #   Maf.routing do
+    #     get '/foo' do
+    #       # process request
+    #     end
+    #   end
     def routing(&block)
       routing = Maf::Dsl::Routing.new
       routing.instance_exec(&block)
