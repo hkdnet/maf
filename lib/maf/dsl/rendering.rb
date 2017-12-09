@@ -1,4 +1,8 @@
+require 'rack'
+
 module Maf::Dsl
+  # @params config [Maf::Config]
+  # @params env [Maf::Env]
   class Rendering
     def initialize(config, env)
       @config = config
@@ -37,7 +41,8 @@ module Maf::Dsl
     end
 
     def to_a
-      [ @status, @header, @body ]
+      res = Rack::Response.new(@body, @status, @header)
+      res.to_a
     end
   end
 end

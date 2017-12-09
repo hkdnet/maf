@@ -27,7 +27,7 @@ RSpec.describe Maf::Server do
     it do
       expect(subject[0]).to eq 200
       expect(subject[1]).to include({ 'Content-Type' => 'text/plain' })
-      expect(subject[2]).to include 'test'
+      expect(subject[2].body).to include 'test'
     end
   end
 end
