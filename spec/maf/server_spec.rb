@@ -14,7 +14,7 @@ RSpec.describe Maf::Server do
     end
     let(:env) do
       {
-        'REQUEST_PATH' => '/foo',
+        'PATH_INFO' => '/foo',
         'REQUEST_METHOD' => 'GET',
       }
     end
