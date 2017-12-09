@@ -3,28 +3,17 @@ require 'spec_helper'
 require 'cgi'
 
 RSpec.describe Maf::Env do
-  subject { Maf::Env.new(env) }
+  subject { Maf::Env.new(Rack::Request.new(env)) }
 
   let(:env) do
     {
       'REQUEST_METHOD' => 'GET',
-      'REQUEST_PATH' => '/foo',
+      'PATH_INFO' => '/foo',
       'QUERY_STRING' => 'bar=1&baz=2',
+      'rack.input' => StringIO.new(body),
     }
   end
-
-
-  [
-    %w(method REQUEST_METHOD),
-    %w(path REQUEST_PATH),
-    %w(query QUERY_STRING),
-  ].each do |method_name, header_key|
-    describe "##{method_name}" do
-      it "returns env['#{header_key}']" do
-        expect(subject.send(method_name)).to eq env[header_key]
-      end
-    end
-  end
+  let(:body) { '' }
 
   describe '#params' do
     it 'should be frozen' do
@@ -53,18 +42,13 @@ RSpec.describe Maf::Env do
       let(:env) do
         super().merge({
           'REQUEST_METHOD' => 'POST',
-          'rack.input' => StringIO.new(body),
           'CONTENT_TYPE' => 'application/x-www-form-urlencoded'
         })
       end
-      let(:body) { '' }
 
       context 'content type application/x-www-form-urlencoded' do
         let(:body) do
-          text = <<~EOS
-          body_param1=1
-          body_param2=Quick brown fox
-          EOS
+          text = "body_param1=1&body_param2=Quick brown fox"
           URI.encode(text)
         end
 

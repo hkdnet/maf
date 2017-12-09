@@ -9,7 +9,7 @@ module Maf
     # @param env [Hash{String => String}] rack env
     # @return [Array] of status, headers, body
     def call(env)
-      myenv = Maf::Env.new(env)
+      myenv = Maf::Env.new(Rack::Request.new(env))
       route = @config.routes.find(myenv.method, myenv.path)
       return render_400 unless route
 
