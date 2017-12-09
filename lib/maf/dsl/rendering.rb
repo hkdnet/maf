@@ -32,7 +32,7 @@ module Maf::Dsl
     end
 
     def text(text)
-      @header['Content-Type'] = 'text/plain'
+      @header['Content-Type'] = 'text/plain; charset=utf-8'
       @body = [text]
     end
 
