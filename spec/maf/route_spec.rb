@@ -30,7 +30,7 @@ RSpec.describe Maf::Route do
       allow(subject).to receive(:create_renderer).and_return(renderer)
 
       subject.call(env)
-      expect(subject).to have_received(:create_renderer).with(env)
+      expect(subject).to have_received(:create_renderer).with(Maf.config, env)
     end
   end
 end
